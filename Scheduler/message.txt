@@ -1,0 +1,201 @@
+/**
+ * Lab 2 Doubly Linked Lists
+ * @author ameyadighe
+ * @author 
+ */
+import java.util.NoSuchElementException;
+
+public class List<T> {
+	/*
+	 * 
+	 */
+	private class node {
+        private T data;
+        private node next;
+        private node prev;
+         /*
+          * 
+          */
+        public node(T data) {
+            this.data = data;
+            this.next = null;
+            this.prev = null;
+        }
+	}
+	
+	private int length;
+	private node first;
+	private node last;
+	private node iterator;
+	/*
+	 * 
+	 */
+	public List() {
+		first = null;
+		last = null;
+		length = 0;
+	}
+	/*
+	 * 
+	 */
+	public T getfirst() {
+		return first.data;
+	}
+	/*
+	 * 
+	 */
+	public T getlast() {
+		return last.data;
+	}
+	/*
+	 * 
+	 */
+	public boolean isempty() {
+		return length == 0;
+	}
+	/*
+	 * 
+	 */
+	public int getlength() {
+		return length;
+	}
+	/*
+	 * 
+	 */
+	public T getiterator() {
+		return iterator.next.data;
+	}
+	/*
+	 * 
+	 */
+	public boolean offend() {
+		return iterator.prev == last;
+	}
+	/*
+	 * 
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override public boolean equals(Object o) {
+		if(o==this) {
+			return true;
+		}
+		if(!(o instanceof List)){
+			return false;
+		}
+		List other = (List) o;
+		int x = 0;
+		if(this.length == other.length) {
+			node temp1 = this.first;
+			node temp2 = other.first;
+			while(temp1!=null&&temp2!=null) {
+				if(temp1 == temp2) {
+					x++;
+				}
+				temp1 = temp1.next;
+				temp2 = temp2.next;
+			}
+		}
+		if(x==this.length&&x==other.length) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	/*
+	 * 
+	 */
+	@SuppressWarnings("unused")
+	@Override public String toString() {
+		node t = first;
+		String s = "";
+		while(t!=null) {
+			s+= t.data+" ";
+			t = t.next;
+		}
+		return t + "\n";
+	}
+	/*
+	 * 
+	 */
+	public void removefirst() throws NoSuchElementException {
+		if(this.isempty()==true) {
+			throw new NoSuchElementException("removeFirst(): Cannot remove from an empty List!");
+		}
+		else if(length == 1) {
+			first = null;
+			last = null;
+		}
+		else {
+			first = first.next;
+			first.prev = null;
+		}
+		length--;
+	}
+	/*
+	 * 
+	 */
+	public void removelast()throws NoSuchElementException {
+		if(this.isempty()==true) {
+			throw new NoSuchElementException("removeLast(): Cannot remove from an empty List!");
+		}
+		else if(length == 1) {
+			first = null;
+			last = null;
+		}
+		else {
+			last = last.prev;
+			last.next = null;
+		}
+		length--;
+	}
+	/*
+	 * 
+	 */
+	public void addfirst(T data) {
+		if(this.isempty()==true) {
+			first = last = new node(data);
+		}
+		else {
+			node n = new node(data);
+			n.next = first;
+			first.prev = n;
+			first = n;
+		}
+		length++;
+	}
+	/*
+	 * 
+	 */
+	public void addlast(T data) {
+		if(this.isempty()==true) {
+			first = last = new node(data);
+		}
+		else {
+			node n = new node(data);
+			last.next = n;
+			n.prev = last;
+			last = n;
+			
+		}
+		length++;
+		
+	}
+	/*
+	 * 
+	 */
+	public void placeiterator() {
+		iterator.next = first;
+		first.prev = iterator;
+		iterator.prev = null;
+	}
+	/*
+	 * 
+	 */
+	public void removeiterator() {
+		
+	}
+	
+	
+}
